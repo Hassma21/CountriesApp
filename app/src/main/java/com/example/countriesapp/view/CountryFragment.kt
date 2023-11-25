@@ -9,9 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.countriesapp.R
 import com.example.countriesapp.databinding.FragmentCountryBinding
-import com.example.countriesapp.databinding.FragmentFeedFragementBinding
+import com.example.countriesapp.util.setImage
 import com.example.countriesapp.viewmodel.CountryViewModel
-import com.example.countriesapp.viewmodel.FeedViewModel
+
 
 class CountryFragment : Fragment() {
 
@@ -35,10 +35,10 @@ class CountryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding= FragmentCountryBinding.bind(view)
         viewModel = ViewModelProvider(this).get(CountryViewModel::class.java)
-        viewModel.getDataFromRoom()
         arguments?.let{
             countryUuid = CountryFragmentArgs.fromBundle(it).countryUuid
         }
+        viewModel.getDataFromRoom(countryUuid)
         observeLiveData()
     }
     private fun observeLiveData(){
@@ -50,6 +50,7 @@ class CountryFragment : Fragment() {
                 binding.currencyOfCountry.text = it.countryCurrency
                 binding.languageOfCountry.text = it.countryLanguage
                 binding.regionOfCountry.text = it.countryRegion
+                binding.countryImage.setImage(it.countryImageUrl!!,requireContext())
 
             }
 

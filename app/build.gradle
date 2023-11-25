@@ -47,9 +47,11 @@ android {
         jvmTarget = '1.8'
     }
 }
-
+apply plugin: 'kotlin-kapt'
 dependencies {
     def nav_version = "2.7.5"
+    def retrofit_version = "2.7.0"
+    def room_version = "2.6.0"
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -63,4 +65,16 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
+    implementation ("com.squareup.retrofit2:retrofit:$retrofit_version")
+    implementation ("com.squareup.retrofit2:converter-gson:$retrofit_version")
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation "io.reactivex.rxjava3:rxjava:3.1.0"
+
+    implementation 'com.squareup.picasso:picasso:2.8'
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-rxjava3:$room_version")
 }

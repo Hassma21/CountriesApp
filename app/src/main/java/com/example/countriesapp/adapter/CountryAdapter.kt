@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.countriesapp.databinding.ItemCountryBinding
 import com.example.countriesapp.model.Country
+import com.example.countriesapp.util.setImage
 import com.example.countriesapp.view.FeedFragementDirections
 
 class CountryAdapter(val countryList :ArrayList<Country>) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
@@ -27,9 +28,9 @@ class CountryAdapter(val countryList :ArrayList<Country>) : RecyclerView.Adapter
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
         holder.binding.countryName.text = countryList[position].countryName
         holder.binding.countryRegion.text = countryList[position].countryRegion
-
+        holder.binding.countryImageView.setImage(countryList[position].countryImageUrl!!,holder.binding.root.context)
         holder.binding.root.setOnClickListener {
-            val action = FeedFragementDirections.actionFeedFragementToCountryFragment()
+            val action = FeedFragementDirections.actionFeedFragementToCountryFragment().setCountryUuid(countryList[position].uuid)
             Navigation.findNavController(it).navigate(action)
         }
     }

@@ -37,6 +37,15 @@ class FeedFragement : Fragment() {
         viewModel.refreshData()
         binding.rcwCountryList.layoutManager = LinearLayoutManager(context)
         binding.rcwCountryList.adapter = countryAdapter
+
+        binding.swiperefresh.setOnRefreshListener {
+            binding.rcwCountryList.visibility = View.GONE
+            binding.countryError.visibility = View.GONE
+            binding.countryLoading.visibility = View.VISIBLE
+            viewModel.refreshFromAPI()
+            binding.swiperefresh.isRefreshing = false
+        }
+
         observeLiveData()
 
     }
