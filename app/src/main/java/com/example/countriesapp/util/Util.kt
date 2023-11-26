@@ -2,11 +2,12 @@ package com.example.countriesapp.util
 
 import android.content.Context
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.example.countriesapp.R
 import com.squareup.picasso.Picasso
 
-fun ImageView.setImage(url :String, contex: Context){
+fun ImageView.setImage(url: String, contex: Context) {
     Picasso.get()
         .load(url)
         .placeholder(placeHolderProgressBar(contex))
@@ -15,10 +16,16 @@ fun ImageView.setImage(url :String, contex: Context){
         .centerCrop()
         .into(this)
 }
-fun placeHolderProgressBar(contex : Context) : CircularProgressDrawable {
+
+fun placeHolderProgressBar(contex: Context): CircularProgressDrawable {
     return CircularProgressDrawable(contex).apply {
         strokeWidth = 8f
         centerRadius = 40f
         start()
     }
+}
+
+@BindingAdapter("android:dowlandImage")
+fun dowlandImage(view: ImageView, url: String) {
+    view.setImage(url, view.context)
 }

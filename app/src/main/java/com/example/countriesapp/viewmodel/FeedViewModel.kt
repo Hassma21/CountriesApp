@@ -57,7 +57,7 @@ class FeedViewModel(application: Application) : AndroidViewModel(application)  {
         disposable.add(
             countryApiService.getData()
                 .subscribeOn(Schedulers.newThread())
-                .observeOn(Schedulers.newThread())
+                .observeOn(Schedulers.single())
                 .subscribeWith(object : DisposableSingleObserver<List<Country>>(){
                     override fun onSuccess(t: List<Country>) {
                         storeInSQLite(t)

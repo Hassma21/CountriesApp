@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="selectedCountry"
+            type="com.example.countriesapp.model.Country" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,13 +24,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5"
+            android:dowlandImage="@{selectedCountry.countryImageUrl}"
             tools:src="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/nameOfCountry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Country Name"
+            android:text="@{selectedCountry.countryName}"
             app:layout_constraintBottom_toTopOf="@+id/capitalOfCountry"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -39,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Country Capital"
+            android:text="@{selectedCountry.countryCapital}"
             app:layout_constraintBottom_toTopOf="@+id/regionOfCountry"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -52,7 +59,7 @@
             android:id="@+id/regionOfCountry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Country Region"
+            android:text="@{selectedCountry.countryRegion}"
             app:layout_constraintBottom_toTopOf="@+id/currencyOfCountry"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -65,7 +72,7 @@
             android:id="@+id/currencyOfCountry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Country Currency"
+            android:text="@{selectedCountry.countryCurrency}"
             app:layout_constraintBottom_toTopOf="@+id/languageOfCountry"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -78,7 +85,7 @@
             android:id="@+id/languageOfCountry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Country Language"
+            android:text="@{selectedCountry.countryLanguage}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

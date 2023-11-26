@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.countriesapp.R
 import com.example.countriesapp.databinding.FragmentCountryBinding
+import com.example.countriesapp.databinding.ItemCountryBinding
 import com.example.countriesapp.util.setImage
 import com.example.countriesapp.viewmodel.CountryViewModel
 
@@ -28,12 +30,13 @@ class CountryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_country, container, false)
+        binding= DataBindingUtil.inflate<FragmentCountryBinding>(inflater, R.layout.fragment_country,container,false)
+        return  binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding= FragmentCountryBinding.bind(view)
+
         viewModel = ViewModelProvider(this).get(CountryViewModel::class.java)
         arguments?.let{
             countryUuid = CountryFragmentArgs.fromBundle(it).countryUuid
@@ -45,12 +48,13 @@ class CountryFragment : Fragment() {
         viewModel.countryLiveData.observe(viewLifecycleOwner, Observer {
 
             it?.let{
-                binding.nameOfCountry.text = it.countryName
+                binding.selectedCountry = it
+                /*binding.nameOfCountry.text = it.countryName
                 binding.capitalOfCountry.text = it.countryCapital
                 binding.currencyOfCountry.text = it.countryCurrency
                 binding.languageOfCountry.text = it.countryLanguage
                 binding.regionOfCountry.text = it.countryRegion
-                binding.countryImage.setImage(it.countryImageUrl!!,requireContext())
+                binding.countryImage.setImage(it.countryImageUrl!!,requireContext())*/
 
             }
 
